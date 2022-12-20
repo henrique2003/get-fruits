@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.KeyboardAvoidingView`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.ORANGE};
   justify-content: space-between;
@@ -32,11 +32,16 @@ export const Title = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
 `
 
-export const Description = styled.Text`
-  margin-top: 15px;
-  color: ${({ theme }) => theme.COLORS.PURPLE_LIGHT};
-  font-size: ${({ theme }) => theme.FONT_SIZE.MD};
+export const TextInput = styled.TextInput`
+  margin-top: 20px;
+  height: 55px;
+  width: 100%;
+  background-color: ${({ theme }) => theme.COLORS.GRAY_LIGHT};
+  border-radius: 10px;
+  color: ${({ theme }) => theme.COLORS.GRAY};
+  font-size: ${({ theme }) => theme.FONT_SIZE.LG};
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  padding: 0 20px;
 `
 
 export const Button = styled.TouchableOpacity`
