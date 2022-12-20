@@ -1,0 +1,13 @@
+colors
+#FFFAEB salad_1
+#FEF0F0 salad_2
+#F1EFF6 salad_3
+
+
+import { useFonts } from '@expo-google-fonts/lato/useFonts'
+import { Lato_400Regular, Lato_700Bold, Lato_100Thin, Lato_900Black } from '@expo-google-fonts/lato'
+
+Lato_400Regular,
+Lato_700Bold,
+Lato_100Thin,
+Lato_900Black

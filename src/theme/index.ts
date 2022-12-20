@@ -2,28 +2,33 @@ export default {
   COLORS: {
     WHITE: '#FFFFFF',
 
-    GREEN_700: '#00875F',
-    GREEN_500: '#00B37E',
+    GREEN: '#4CD964',
+    GREEN_LIGHT: '#E0FFE5',
 
-    RED: '#F75A68',
-    RED_DARK: '#AA2834',
+    BLUE: '#27214D',
 
-    GRAY_700: '#121214',
-    GRAY_600: '#202024',
-    GRAY_500: '#29292E',
-    GRAY_400: '#323238',
-    GRAY_300: '#7C7C8A',
-    GRAY_200: '#C4C4CC',
-    GRAY_100: '#E1E1E6'
+    PURPLE: '#938DB5',
+    PURPLE_LIGHT: '#5D577E',
+
+    GRAY: '#C2BDBD',
+    GRAY_LIGHT: '#F3F1F1',
+
+    ORANGE: '#FFA451',
+    ORANGE_LIGHT: '#FFF2E7',
+
+    DARK_OPACITY: 'rgba(0,0,0,0.4)'
   },
   FONT_FAMILY: {
-    REGULAR: 'Outfit_400Regular',
-    SEMIBOLD: 'Outfit_600SemiBold'
+    THIN: 'Lato_100Thin',
+    REGULAR: 'Lato_400Regular',
+    BOLD: 'Lato_700Bold',
+    BLACK: 'Lato_900Black'
   },
   FONT_SIZE: {
-    SM: 14,
-    MD: 16,
-    LG: 18,
-    XL: 24
+    SM: '13px',
+    MD: '15px',
+    LG: '18px',
+    XL: '19px',
+    SXL: '22px'
   }
 }
