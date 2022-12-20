@@ -2,10 +2,10 @@ import { StatusBar } from 'expo-status-bar'
 import { ThemeProvider } from 'styled-components'
 import { useFonts } from '@expo-google-fonts/lato/useFonts'
 import { Lato_400Regular, Lato_700Bold, Lato_100Thin, Lato_900Black } from '@expo-google-fonts/lato'
+import { Text } from 'react-native'
 
 import theme from './src/theme'
-import { Text } from 'react-native'
-import { Introduction } from './src/screens/Introduction'
+import { Routes } from './src/routes'
 
 function App (): JSX.Element {
   const [fontLoaded] = useFonts({
@@ -18,7 +18,7 @@ function App (): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
         {fontLoaded
-          ? <Introduction />
+          ? <Routes />
           : <Text>Loading</Text>}
       <StatusBar
         backgroundColor='transparent'

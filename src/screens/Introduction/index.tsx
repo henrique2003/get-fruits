@@ -1,7 +1,14 @@
 import * as S from './styles'
 import { basket_of_fruits_1 } from '../../assets'
+import { RoutesName } from '../../routes/types'
 
-export const Introduction: React.FC = () => {
+interface Props {
+  navigation: {
+    navigate: (screen_name: RoutesName) => void
+  }
+}
+
+export const Introduction: React.FC<Props> = ({ navigation }) => {
   return (
     <S.Container>
       <S.BasketContainer>
@@ -12,6 +19,7 @@ export const Introduction: React.FC = () => {
         <S.Description>Nosso delivery é o melhor em fazer saladas de frutas frequinhas para você!!!</S.Description>
         <S.Button
           activeOpacity={0.8}
+          onPress={() => navigation.navigate('Authentication')}
         >
           <S.TextButton>Bora continuar</S.TextButton>
         </S.Button>
