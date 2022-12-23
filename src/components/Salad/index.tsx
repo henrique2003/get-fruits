@@ -1,6 +1,7 @@
 import * as S from './styles'
 import theme from '../../theme'
 import { ImageSourcePropType, View } from 'react-native'
+import { Minus, Plus } from 'phosphor-react-native'
 
 interface Props {
   id: string
@@ -13,18 +14,35 @@ interface Props {
   }
   bgColor: S.BgColor
   price: string
+  isInCart?: boolean
+  liked?: boolean
 }
 
 export const Salad: React.FC<Props> = ({
   title,
   image,
   bgColor,
-  price
+  price,
+  isInCart,
+  liked
 }) => {
   return (
     <S.Container bgColor={bgColor}>
       <View>
-        <S.LikeIcon size={22} color={theme.COLORS.ORANGE} />
+        {liked
+          ? (
+              <S.LikeIcon
+                size={22}
+                color={theme.COLORS.ORANGE}
+                weight="fill"
+              />
+            )
+          : (
+              <S.LikeIcon
+                size={22}
+                color={theme.COLORS.ORANGE}
+              />
+            )}
         <S.SaladImage
           source={image.source}
           width={image.width}
@@ -36,21 +54,17 @@ export const Salad: React.FC<Props> = ({
         <S.Title>{title}</S.Title>
         <S.Actions>
           <S.PriceConainer>
-            <S.DollarSignIcon
-              size={20}
-              color={theme.COLORS.ORANGE}
-            />
-            <S.Price>
-              {price}
-            </S.Price>
+            <S.DollarSignIcon size={20} color={theme.COLORS.ORANGE} />
+            <S.Price>{price}</S.Price>
           </S.PriceConainer>
-          <S.PlusButton
-            activeOpacity={0.7}
-          >
-            <S.PlusIcon
-              size={15}
-              color={theme.COLORS.ORANGE}
-            />
+          <S.PlusButton activeOpacity={0.7}>
+            {isInCart
+              ? (
+              <Minus size={15} color={theme.COLORS.ORANGE} />
+                )
+              : (
+              <Plus size={15} color={theme.COLORS.ORANGE} />
+                )}
           </S.PlusButton>
         </S.Actions>
       </View>

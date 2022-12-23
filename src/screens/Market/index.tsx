@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import * as S from './styles'
 import {
   menu,
@@ -8,9 +10,11 @@ import {
   tropical_fruit_salad
 } from '../../assets'
 import theme from '../../theme'
-import { Salad } from '../../components/Salad'
+import { Salad, TextFilter } from '../../components'
 
 export const Market: React.FC = () => {
+  const [currentFilter, setCurrentFilter] = useState('Em alta')
+
   return (
     <S.Container
       contentContainerStyle={{
@@ -67,6 +71,8 @@ export const Market: React.FC = () => {
           }}
           price="8,000"
           title="Manga e amora"
+          liked
+          isInCart
           />
       </S.RecomendedSlide>
       <S.FiltersContainer
@@ -75,23 +81,27 @@ export const Market: React.FC = () => {
         contentContainerStyle={{
           paddingBottom: 15
         }}
-        >
-        <S.TextFilterContainer>
-          <S.TextFilter active={true}>Em alta</S.TextFilter>
-          <S.SpanBottom active={true} />
-        </S.TextFilterContainer>
-        <S.TextFilterContainer>
-          <S.TextFilter active={false}>Popular</S.TextFilter>
-          <S.SpanBottom active={false} />
-        </S.TextFilterContainer>
-        <S.TextFilterContainer>
-          <S.TextFilter active={false}>Novidades</S.TextFilter>
-          <S.SpanBottom active={false} />
-        </S.TextFilterContainer>
-        <S.TextFilterContainer>
-          <S.TextFilter active={false}>Gourmet</S.TextFilter>
-          <S.SpanBottom active={false} />
-        </S.TextFilterContainer>
+      >
+        <TextFilter
+          active={currentFilter === 'Em alta'}
+          text='Em alta'
+          onPress={() => setCurrentFilter('Em alta')}
+        />
+        <TextFilter
+          active={currentFilter === 'Popular'}
+          text='Popular'
+          onPress={() => setCurrentFilter('Popular')}
+        />
+        <TextFilter
+          active={currentFilter === 'Novidades'}
+          text='Novidades'
+          onPress={() => setCurrentFilter('Novidades')}
+        />
+        <TextFilter
+          active={currentFilter === 'Gourmet'}
+          text='Gourmet'
+          onPress={() => setCurrentFilter('Gourmet')}
+        />
       </S.FiltersContainer>
       <S.FilterSlide
         horizontal

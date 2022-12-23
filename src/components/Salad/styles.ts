@@ -1,4 +1,4 @@
-import { CurrencyNgn, Heart, Plus } from 'phosphor-react-native'
+import { CurrencyNgn, Heart } from 'phosphor-react-native'
 import styled from 'styled-components/native'
 
 export type BgColor = '#fbfbfb' | '#FFFAEB' | '#FEF0F0' | '#F1EFF6'
@@ -73,8 +73,4 @@ export const PlusButton = styled.TouchableOpacity`
   border-radius: 40px;
   width: 25px;
   height: 25px;
-`
-
-export const PlusIcon = styled(Plus)`
-
 `
