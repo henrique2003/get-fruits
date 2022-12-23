@@ -1,8 +1,10 @@
 import { CurrencyNgn, Heart, Plus } from 'phosphor-react-native'
 import styled from 'styled-components/native'
 
+export type BgColor = '#fbfbfb' | '#FFFAEB' | '#FEF0F0' | '#F1EFF6'
+
 type ContainerProps = {
-  bgColor: '#fbfbfb' | '#FFFAEB' | '#FEF0F0' | '#F1EFF6'
+  bgColor: BgColor
 }
 
 export const Container = styled.View<ContainerProps>`
@@ -12,7 +14,7 @@ export const Container = styled.View<ContainerProps>`
   border-radius: 20px;
   margin-right: 20px;
   padding: 15px;
-  justify-content: center;
+  justify-content: space-between;
   background-color: ${({ bgColor }) => bgColor};
 `
 
@@ -20,11 +22,17 @@ export const LikeIcon = styled(Heart)`
   margin-left: auto;
 `
 
-export const SaladImage = styled.Image`
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
-  margin-top: -15px;
+interface SaladImageProps {
+  width?: string
+  height?: string
+  mgTop?: string
+}
+
+export const SaladImage = styled.Image<SaladImageProps>`
+  width: ${({ width }) => width ? `${width}` : '80px'};
+  height: ${({ height }) => height ? `${height}` : '80px'};
+  margin: auto;
+  margin-top: ${({ mgTop }) => mgTop ? `${mgTop}` : '-15px'};;
 `
 
 export const Title = styled.Text`

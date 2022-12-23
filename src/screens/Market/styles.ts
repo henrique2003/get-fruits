@@ -1,10 +1,11 @@
 import { MagnifyingGlass } from 'phosphor-react-native'
 
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   padding: 30px 0;
+  height: 100%;
   background: ${({ theme }) => theme.COLORS.WHITE};
 `
 
@@ -78,7 +79,7 @@ export const SearchIcon = styled(MagnifyingGlass)`
 `
 
 export const Subtitle = styled.Text`
-  margin-top: 40px;
+  margin-top: 50px;
   color: ${({ theme }) => theme.COLORS.BLUE};
   font-size: ${({ theme }) => theme.FONT_SIZE.SXL};
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
@@ -87,6 +88,51 @@ export const Subtitle = styled.Text`
 
 export const RecomendedSlide = styled.ScrollView`
   margin-top: 20px;
+  padding: 0 30px;
+  max-height: 210px;
+`
+
+export const FiltersContainer = styled.ScrollView`
+  padding: 0 30px;
+  margin-top: 50px;
+  max-height: 50px;
+`
+
+export const TextFilterContainer = styled.View`
+
+`
+
+interface TextFilterProps {
+  active: boolean
+}
+
+export const TextFilter = styled.Text<TextFilterProps>`
+  margin-right: 40px;
+
+  ${({ active }) => active
+? css`
+    font-size: ${({ theme }) => theme.FONT_SIZE.SXL};
+    color: ${({ theme }) => theme.COLORS.BLUE};
+    font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+    `
+: css`
+    margin-top: 5px;
+    color: ${({ theme }) => theme.COLORS.PURPLE};
+    font-size: ${({ theme }) => theme.FONT_SIZE.MD};
+    font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  `}
+`
+
+export const SpanBottom = styled.View<TextFilterProps>`
+  opacity: ${({ active }) => active ? 1 : 0};
+  width: 30px;
+  height: 2px;
+  margin-left: 1px;
+  background-color:  ${({ theme }) => theme.COLORS.ORANGE};
+`
+
+export const FilterSlide = styled.ScrollView`
+  margin-top: 15px;
   padding: 0 30px;
   max-height: 210px;
 `
