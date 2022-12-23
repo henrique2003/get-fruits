@@ -8,9 +8,7 @@ import tropical_fruit_salad from './foods/tropical-fruit-salad.png'
 import basket from './icons/basket.png'
 import check from './icons/check.png'
 import close from './icons/close.png'
-import like from './icons/like.svg'
 import menu from './icons/menu.png'
-import money from './icons/money.svg'
 import plus from './icons/plus.png'
 
 export {
@@ -24,8 +22,6 @@ export {
   basket,
   check,
   close,
-  like,
   menu,
-  money,
   plus
 }

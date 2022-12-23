@@ -23,7 +23,7 @@ export const Authentication: React.FC<Props> = ({ navigation }) => {
         />
         <S.Button
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('Authentication')}
+          onPress={() => navigation.navigate('Market')}
         >
           <S.TextButton>Começar</S.TextButton>
         </S.Button>
