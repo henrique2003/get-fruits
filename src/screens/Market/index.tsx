@@ -32,8 +32,9 @@ interface IFruitSalad {
 }
 
 export const Market: React.FC = () => {
+  const [search, setSearch] = useState('')
   const [combos, setCombos] = useState<IFruitSalad[]>([])
-  const [categorysFruitsSalad, setCategorysFruitsSalad] = useState<IFruitSalad[]>([])
+  const [fruitsSalad, setFruitsSalad] = useState<IFruitSalad[]>([])
   const [currentFilter, setCurrentFilter] = useState('Em alta')
 
   useEffect(() => {
@@ -60,7 +61,7 @@ export const Market: React.FC = () => {
       }
     ])
 
-    setCategorysFruitsSalad([
+    setFruitsSalad([
       {
         id: '3',
         bgColor: '#FFFAEB',
@@ -109,7 +110,34 @@ export const Market: React.FC = () => {
     ])
   }, [])
 
-  const flitredCategoryFuitsSalads = categorysFruitsSalad.filter(({ categorys }) => {
+  function searchFS (): IFruitSalad[] {
+    const filterFruitsSalads: IFruitSalad[] = []
+    const textSearch = search.toLocaleLowerCase()
+
+    fruitsSalad.map(item => {
+      const title = item.title.toLocaleLowerCase()
+
+      if (title.includes(textSearch)) {
+        filterFruitsSalads.push(item)
+      }
+      return item
+    })
+
+    combos.map(item => {
+      const title = item.title.toLocaleLowerCase()
+
+      if (title.includes(textSearch)) {
+        filterFruitsSalads.push(item)
+      }
+      return item
+    })
+
+    return filterFruitsSalads
+  }
+
+  const serachFruitSalad = searchFS()
+
+  const flitredCategoryFuitsSalads = fruitsSalad.filter(({ categorys }) => {
     return categorys[0] === currentFilter || categorys[1] === currentFilter
   })
 
@@ -138,83 +166,115 @@ export const Market: React.FC = () => {
       <S.ContainerInput>
         <S.TextInput
           placeholder='Procure pela sua salada de fruta'
-          />
+          onChangeText={(e) => setSearch(e)}
+          value={search}
+        />
         <S.SearchIcon
           size={20}
           color={theme.COLORS.DARK_OPACITY}
           />
       </S.ContainerInput>
-      <S.Subtitle>Combos recomendados</S.Subtitle>
-      <S.RecomendedSlide
-        horizontal
-        alwaysBounceHorizontal
-        contentContainerStyle={{
-          paddingBottom: 15,
-          paddingRight: 30
-        }}
-        showsHorizontalScrollIndicator={false}
-        >
-        {combos.length > 0 && combos.map(fruitSaladItem => (
-          <FruitSalad
-            key={fruitSaladItem.id}
-            id={fruitSaladItem.id}
-            bgColor={fruitSaladItem.bgColor}
-            image={fruitSaladItem.image}
-            price={fruitSaladItem.price}
-            title={fruitSaladItem.title}
-          />
-        ))}
-      </S.RecomendedSlide>
-      <S.FiltersContainer
-        horizontal
-        alwaysBounceHorizontal
-        contentContainerStyle={{
-          paddingBottom: 15,
-          paddingRight: 30
-        }}
-        showsHorizontalScrollIndicator={false}
-      >
-        <TextFilter
-          active={currentFilter === 'Em alta'}
-          text='Em alta'
-          onPress={() => setCurrentFilter('Em alta')}
-        />
-        <TextFilter
-          active={currentFilter === 'Popular'}
-          text='Popular'
-          onPress={() => setCurrentFilter('Popular')}
-        />
-        <TextFilter
-          active={currentFilter === 'Novidades'}
-          text='Novidades'
-          onPress={() => setCurrentFilter('Novidades')}
-        />
-        <TextFilter
-          active={currentFilter === 'Gourmet'}
-          text='Gourmet'
-          onPress={() => setCurrentFilter('Gourmet')}
-        />
-      </S.FiltersContainer>
-      <S.FilterSlide
-        horizontal
-        alwaysBounceHorizontal
-        contentContainerStyle={{
-          paddingBottom: 15,
-          paddingRight: 30
-        }}
-        showsHorizontalScrollIndicator={false}
-        >
-        {flitredCategoryFuitsSalads.length > 0 && flitredCategoryFuitsSalads.map(fruitSaladItem => (
-          <FruitSalad
-            key={fruitSaladItem.id}
-            id={fruitSaladItem.id}
-            bgColor={fruitSaladItem.bgColor}
-            image={fruitSaladItem.image}
-            price={fruitSaladItem.price}
-            title={fruitSaladItem.title}
-          />
-        ))}
-      </S.FilterSlide>
+      {search
+        ? (
+          <S.SearchContainer>
+            <S.SearchMessage>Resultados para "{search}"</S.SearchMessage>
+            <S.SearchGrid
+              horizontal
+              alwaysBounceHorizontal
+              contentContainerStyle={{
+                paddingBottom: 15,
+                paddingRight: 30
+              }}
+              showsHorizontalScrollIndicator={false}
+            >
+              {serachFruitSalad.length > 0 && serachFruitSalad.map(item => (
+                <FruitSalad
+                key={item.id}
+                id={item.id}
+                bgColor={item.bgColor}
+                image={item.image}
+                price={item.price}
+                title={item.title}
+                />
+              ))}
+            </S.SearchGrid>
+          </S.SearchContainer>
+          )
+        : (
+        <>
+          <S.Subtitle>Combos recomendados</S.Subtitle>
+          <S.RecomendedSlide
+            horizontal
+            alwaysBounceHorizontal
+            contentContainerStyle={{
+              paddingBottom: 15,
+              paddingRight: 30
+            }}
+            showsHorizontalScrollIndicator={false}
+            >
+            {combos.length > 0 && combos.map(fruitSaladItem => (
+              <FruitSalad
+                key={fruitSaladItem.id}
+                id={fruitSaladItem.id}
+                bgColor={fruitSaladItem.bgColor}
+                image={fruitSaladItem.image}
+                price={fruitSaladItem.price}
+                title={fruitSaladItem.title}
+              />
+            ))}
+          </S.RecomendedSlide>
+          <S.FiltersContainer
+            horizontal
+            alwaysBounceHorizontal
+            contentContainerStyle={{
+              paddingBottom: 15,
+              paddingRight: 30
+            }}
+            showsHorizontalScrollIndicator={false}
+          >
+            <TextFilter
+              active={currentFilter === 'Em alta'}
+              text='Em alta'
+              onPress={() => setCurrentFilter('Em alta')}
+            />
+            <TextFilter
+              active={currentFilter === 'Popular'}
+              text='Popular'
+              onPress={() => setCurrentFilter('Popular')}
+            />
+            <TextFilter
+              active={currentFilter === 'Novidades'}
+              text='Novidades'
+              onPress={() => setCurrentFilter('Novidades')}
+            />
+            <TextFilter
+              active={currentFilter === 'Gourmet'}
+              text='Gourmet'
+              onPress={() => setCurrentFilter('Gourmet')}
+            />
+          </S.FiltersContainer>
+          <S.FilterSlide
+            horizontal
+            alwaysBounceHorizontal
+            contentContainerStyle={{
+              paddingBottom: 15,
+              paddingRight: 30
+            }}
+            showsHorizontalScrollIndicator={false}
+            >
+            {flitredCategoryFuitsSalads.length > 0 && flitredCategoryFuitsSalads.map(fruitSaladItem => (
+              <FruitSalad
+                key={fruitSaladItem.id}
+                id={fruitSaladItem.id}
+                bgColor={fruitSaladItem.bgColor}
+                image={fruitSaladItem.image}
+                price={fruitSaladItem.price}
+                title={fruitSaladItem.title}
+              />
+            ))}
+          </S.FilterSlide>
+        </>
+          )}
     </S.Container>
   )
 }

@@ -46,7 +46,7 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.COLORS.BLUE};
   font-size: ${({ theme }) => theme.FONT_SIZE.XL};
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  max-width: 280px;
+  max-width: 350px;
   padding: 0 30px;
 `
 
@@ -76,6 +76,22 @@ export const TextInput = styled.TextInput`
 export const SearchIcon = styled(MagnifyingGlass)`
   margin-top: -36px;
   margin-left: 19px;
+`
+
+export const SearchContainer = styled.View`
+  margin-top: 50px;
+  padding: 0 30px;
+`
+
+export const SearchMessage = styled.Text`
+  margin-bottom: 20px;
+  color: ${({ theme }) => theme.COLORS.GRAY};
+  font-size: ${({ theme }) => theme.FONT_SIZE.LG};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+`
+
+export const SearchGrid = styled.ScrollView`
+  flex: 1;
 `
 
 export const Subtitle = styled.Text`
