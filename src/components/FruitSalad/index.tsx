@@ -14,16 +14,16 @@ interface Props {
   }
   bgColor: S.BgColor
   price: string
-  isInCart?: boolean
+  isInBasket?: boolean
   liked?: boolean
 }
 
-export const Salad: React.FC<Props> = ({
+export const FruitSalad: React.FC<Props> = ({
   title,
   image,
   bgColor,
   price,
-  isInCart,
+  isInBasket,
   liked
 }) => {
   return (
@@ -58,7 +58,7 @@ export const Salad: React.FC<Props> = ({
             <S.Price>{price}</S.Price>
           </S.PriceConainer>
           <S.PlusButton activeOpacity={0.7}>
-            {isInCart
+            {isInBasket
               ? (
               <Minus size={15} color={theme.COLORS.ORANGE} />
                 )

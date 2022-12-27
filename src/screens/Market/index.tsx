@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { ImageSourcePropType } from 'react-native'
 
 import * as S from './styles'
 import {
@@ -7,13 +8,110 @@ import {
   honey_lime,
   berry_mango,
   melon_salad,
-  tropical_fruit_salad
+  tropical_fruit_salad,
+  quinoa_salad
 } from '../../assets'
 import theme from '../../theme'
-import { Salad, TextFilter } from '../../components'
+import { FruitSalad, TextFilter } from '../../components'
+import { BgColor } from '../../components/FruitSalad/styles'
+
+interface IFruitSalad {
+  id: string
+  bgColor: BgColor
+  title: string
+  price: string
+  liked?: boolean
+  isInBasket?: boolean
+  image: {
+    source: ImageSourcePropType
+    width?: string
+    height?: string
+    mgTop?: string
+  }
+  categorys?: string[]
+}
 
 export const Market: React.FC = () => {
+  const [combos, setCombos] = useState<IFruitSalad[]>([])
+  const [categorysFruitsSalad, setCategorysFruitsSalad] = useState<IFruitSalad[]>([])
   const [currentFilter, setCurrentFilter] = useState('Em alta')
+
+  useEffect(() => {
+    setCombos([
+      {
+        id: '1',
+        bgColor: '#fbfbfb',
+        image: {
+          source: honey_lime
+        },
+        price: '2,000',
+        title: 'Limão'
+      },
+      {
+        id: '2',
+        bgColor: '#fbfbfb',
+        image: {
+          source: berry_mango
+        },
+        price: '8,000',
+        title: 'Manga e amora',
+        liked: true,
+        isInBasket: true
+      }
+    ])
+
+    setCategorysFruitsSalad([
+      {
+        id: '3',
+        bgColor: '#FFFAEB',
+        image: {
+          source: quinoa_salad
+        },
+        price: '10,000',
+        title: 'Quinoa',
+        categorys: [
+          'Em alta',
+          'Popular'
+        ]
+      },
+      {
+        id: '4',
+        bgColor: '#FEF0F0',
+        image: {
+          source: tropical_fruit_salad,
+          width: '100px',
+          height: '50px',
+          mgTop: '5px'
+        },
+        price: '10,000',
+        title: 'Tropical',
+        categorys: [
+          'Em alta',
+          'Novidades'
+        ]
+      },
+      {
+        id: '5',
+        bgColor: '#F1EFF6',
+        image: {
+          source: melon_salad,
+          width: '100px',
+          height: '60px',
+          mgTop: '5px'
+        },
+        price: '10,000',
+        title: 'Melão',
+        categorys: [
+          'Em alta',
+          'Gourmet'
+        ]
+      }
+    ])
+  }, [])
+
+  const flitredCategoryFuitsSalads = categorysFruitsSalad.filter(({ categorys }) => {
+    return categorys[0] === currentFilter || categorys[1] === currentFilter
+  })
 
   return (
     <S.Container
@@ -51,36 +149,30 @@ export const Market: React.FC = () => {
         horizontal
         alwaysBounceHorizontal
         contentContainerStyle={{
-          paddingBottom: 15
+          paddingBottom: 15,
+          paddingRight: 30
         }}
+        showsHorizontalScrollIndicator={false}
         >
-        <Salad
-          bgColor='#fbfbfb'
-          id='12321'
-          image={{
-            source: honey_lime
-          }}
-          price="2,000"
-          title="Limão"
-        />
-        <Salad
-          bgColor='#fbfbfb'
-          id='12322'
-          image={{
-            source: berry_mango
-          }}
-          price="8,000"
-          title="Manga e amora"
-          liked
-          isInCart
+        {combos.length > 0 && combos.map(fruitSaladItem => (
+          <FruitSalad
+            key={fruitSaladItem.id}
+            id={fruitSaladItem.id}
+            bgColor={fruitSaladItem.bgColor}
+            image={fruitSaladItem.image}
+            price={fruitSaladItem.price}
+            title={fruitSaladItem.title}
           />
+        ))}
       </S.RecomendedSlide>
       <S.FiltersContainer
         horizontal
         alwaysBounceHorizontal
         contentContainerStyle={{
-          paddingBottom: 15
+          paddingBottom: 15,
+          paddingRight: 30
         }}
+        showsHorizontalScrollIndicator={false}
       >
         <TextFilter
           active={currentFilter === 'Em alta'}
@@ -107,42 +199,21 @@ export const Market: React.FC = () => {
         horizontal
         alwaysBounceHorizontal
         contentContainerStyle={{
-          paddingBottom: 15
+          paddingBottom: 15,
+          paddingRight: 30
         }}
+        showsHorizontalScrollIndicator={false}
         >
-      <Salad
-        bgColor='#FFFAEB'
-        id='12323'
-        image={{
-          source: honey_lime
-        }}
-        price="10,000"
-        title="Quinoa"
-        />
-      <Salad
-        bgColor='#FEF0F0'
-        id='12324'
-        image={{
-          source: tropical_fruit_salad,
-          width: '100px',
-          height: '50px',
-          mgTop: '5px'
-        }}
-        price="10,000"
-        title="Tropical"
-        />
-      <Salad
-        bgColor='#F1EFF6'
-        id='12325'
-        image={{
-          source: melon_salad,
-          width: '100px',
-          height: '60px',
-          mgTop: '5px'
-        }}
-        price="10,000"
-        title="Melão"
-        />
+        {flitredCategoryFuitsSalads.length > 0 && flitredCategoryFuitsSalads.map(fruitSaladItem => (
+          <FruitSalad
+            key={fruitSaladItem.id}
+            id={fruitSaladItem.id}
+            bgColor={fruitSaladItem.bgColor}
+            image={fruitSaladItem.image}
+            price={fruitSaladItem.price}
+            title={fruitSaladItem.title}
+          />
+        ))}
       </S.FilterSlide>
     </S.Container>
   )

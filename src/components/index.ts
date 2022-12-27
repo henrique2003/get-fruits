@@ -1,7 +1,7 @@
 import { TextFilter } from './TextFilter'
-import { Salad } from './Salad'
+import { FruitSalad } from './FruitSalad'
 
 export {
   TextFilter,
-  Salad
+  FruitSalad
 }
