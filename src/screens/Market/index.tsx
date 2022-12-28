@@ -14,6 +14,7 @@ import {
 import theme from '../../theme'
 import { FruitSalad, TextFilter } from '../../components'
 import { BgColor } from '../../components/FruitSalad/styles'
+import { RouteNames } from '../../routes/types'
 
 interface IFruitSalad {
   id: string
@@ -31,7 +32,13 @@ interface IFruitSalad {
   categorys?: string[]
 }
 
-export const Market: React.FC = () => {
+interface Props {
+  navigation: {
+    navigate: (screen_name: RouteNames) => void
+  }
+}
+
+export const Market: React.FC<Props> = ({ navigation }) => {
   const [search, setSearch] = useState('')
   const [combos, setCombos] = useState<IFruitSalad[]>([])
   const [fruitsSalad, setFruitsSalad] = useState<IFruitSalad[]>([])
@@ -155,6 +162,7 @@ export const Market: React.FC = () => {
         </S.ButtonMenu>
         <S.ButtonBasket
           activeOpacity={0.8}
+          onPress={() => navigation.navigate('Basket')}
           >
           <S.Basket source={basket} />
           <S.TextBasket>Minha cesta</S.TextBasket>

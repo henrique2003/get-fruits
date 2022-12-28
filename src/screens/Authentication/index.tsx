@@ -2,11 +2,11 @@ import { Platform } from 'react-native'
 
 import * as S from './styles'
 import { basket_of_fruits_2 } from '../../assets'
-import { RoutesName } from '../../routes/types'
+import { RouteNames } from '../../routes/types'
 
 interface Props {
   navigation: {
-    navigate: (screen_name: RoutesName) => void
+    navigate: (screen_name: RouteNames) => void
   }
 }
 

@@ -1,1 +1,1 @@
-export type RoutesName = 'Introduction' | 'Authentication' | 'Market'
+export type RouteNames = 'Introduction' | 'Authentication' | 'Market' | 'Basket'

@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { Authentication, Market, Introduction } from '../screens'
+import { Authentication, Market, Introduction, Basket } from '../screens'
 
 const Stack = createStackNavigator()
 
@@ -14,6 +14,7 @@ export const Routes: React.FC = () => {
         <Stack.Screen name='Introduction' component={Introduction} />
         <Stack.Screen name='Authentication' component={Authentication} />
         <Stack.Screen name='Market' component={Market} />
+        <Stack.Screen name='Basket' component={Basket} />
       </Stack.Navigator>
     </NavigationContainer>
   )
