@@ -1,9 +1,11 @@
+import { useContext } from 'react'
 import { ScrollView } from 'react-native'
+
 import { RouteNames } from '../../routes/types'
 import theme from '../../theme'
 import * as S from './styles'
 import { BasketItem } from '../../components'
-import { melon_salad, quinoa_salad, tropical_fruit_salad } from '../../assets'
+import { BasketContext } from '../../context/basket'
 
 interface Props {
   navigation: {
@@ -12,6 +14,8 @@ interface Props {
 }
 
 export const Basket: React.FC<Props> = ({ navigation }) => {
+  const { basket } = useContext(BasketContext)
+
   return (
     <S.Container>
       <S.Content>
@@ -29,37 +33,16 @@ export const Basket: React.FC<Props> = ({ navigation }) => {
           <S.GoBackText>Voltar</S.GoBackText>
         </S.GoBack>
         <ScrollView>
-          <BasketItem
-            bgColor='#FFFAEB'
-            image={{
-              source: quinoa_salad
-            }}
-            price="20,000"
-            quantify={3}
-            text="Quinoa"
-          />
-          <BasketItem
-            bgColor='#F1EFF6'
-            image={{
-              source: melon_salad,
-              height: '40px',
-              width: '60px'
-            }}
-            price="20,000"
-            quantify={2}
-            text="Melão"
-          />
-          <BasketItem
-            bgColor='#FEF0F0'
-            image={{
-              source: tropical_fruit_salad,
-              height: '30px',
-              width: '60px'
-            }}
-            price="20,000"
-            quantify={2}
-            text="Tropical"
-          />
+          {basket.length > 0 && basket.map(fruitSalad => (
+            <BasketItem
+              key={fruitSalad.id}
+              bgColor={fruitSalad.bgColor}
+              image={fruitSalad.image}
+              price={fruitSalad.price}
+              quantify={1}
+              text={fruitSalad.title}
+            />
+          ))}
         </ScrollView>
       </S.Content>
       <S.Footer>

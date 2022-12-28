@@ -30,6 +30,7 @@ export const ImageContainer = styled.View<ImageContainerProps>`
   justify-content: center;
   align-items: center;
   margin-left: 15px;
+  padding: 15px;
 `
 
 interface SaladImageProps {
@@ -39,8 +40,8 @@ interface SaladImageProps {
 }
 
 export const Image = styled.Image<SaladImageProps>`
-  width: ${({ width }) => width ? `${width}` : '55px'};
-  height: ${({ height }) => height ? `${height}` : '55px'};
+  width: 100%;
+  height: ${({ height }) => height ? '35px' : '100%'};
 `
 
 export const TextContainer = styled.View`
