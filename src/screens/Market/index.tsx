@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react'
-import { ImageSourcePropType } from 'react-native'
+import { useState, useEffect, useContext } from 'react'
 
 import * as S from './styles'
 import {
   menu,
-  basket,
+  basket as basket_image,
   honey_lime,
   berry_mango,
   melon_salad,
@@ -13,24 +12,9 @@ import {
 } from '../../assets'
 import theme from '../../theme'
 import { FruitSalad, TextFilter } from '../../components'
-import { BgColor } from '../../components/FruitSalad/styles'
 import { RouteNames } from '../../routes/types'
-
-interface IFruitSalad {
-  id: string
-  bgColor: BgColor
-  title: string
-  price: string
-  liked?: boolean
-  isInBasket?: boolean
-  image: {
-    source: ImageSourcePropType
-    width?: string
-    height?: string
-    mgTop?: string
-  }
-  categorys?: string[]
-}
+import { IFruitSalad } from '../../context/basket/types'
+import { BasketContext } from '../../context/basket/index'
 
 interface Props {
   navigation: {
@@ -44,78 +28,116 @@ export const Market: React.FC<Props> = ({ navigation }) => {
   const [fruitsSalad, setFruitsSalad] = useState<IFruitSalad[]>([])
   const [currentFilter, setCurrentFilter] = useState('Em alta')
 
-  useEffect(() => {
-    setCombos([
-      {
-        id: '1',
-        bgColor: '#fbfbfb',
-        image: {
-          source: honey_lime
-        },
-        price: '2,000',
-        title: 'Limão'
-      },
-      {
-        id: '2',
-        bgColor: '#fbfbfb',
-        image: {
-          source: berry_mango
-        },
-        price: '8,000',
-        title: 'Manga e amora',
-        liked: true,
-        isInBasket: true
-      }
-    ])
+  const { basket } = useContext(BasketContext)
 
-    setFruitsSalad([
-      {
-        id: '3',
-        bgColor: '#FFFAEB',
-        image: {
-          source: quinoa_salad
+  useEffect(() => {
+    function loadCombos (): void {
+      let combosData: IFruitSalad[] = [
+        {
+          id: '1',
+          bgColor: '#fbfbfb',
+          image: {
+            source: honey_lime
+          },
+          price: '2,000',
+          title: 'Limão',
+          isInBasket: false
         },
-        price: '10,000',
-        title: 'Quinoa',
-        categorys: [
-          'Em alta',
-          'Popular'
-        ]
-      },
-      {
-        id: '4',
-        bgColor: '#FEF0F0',
-        image: {
-          source: tropical_fruit_salad,
-          width: '100px',
-          height: '50px',
-          mgTop: '5px'
+        {
+          id: '2',
+          bgColor: '#fbfbfb',
+          image: {
+            source: berry_mango
+          },
+          price: '8,000',
+          title: 'Manga e amora',
+          isInBasket: false
+        }
+      ]
+
+      combosData = combosData.map(item => {
+        basket.map(basketItem => {
+          if (item.id === basketItem.id) {
+            item.isInBasket = true
+          }
+
+          return basketItem
+        })
+        return item
+      })
+
+      setCombos(combosData)
+    }
+
+    function loadFruitsSalads (): void {
+      let fruisSaladsData: IFruitSalad[] = [
+        {
+          id: '3',
+          bgColor: '#FFFAEB',
+          image: {
+            source: quinoa_salad
+          },
+          price: '10,000',
+          title: 'Quinoa',
+          categorys: [
+            'Em alta',
+            'Popular'
+          ],
+          isInBasket: false
         },
-        price: '10,000',
-        title: 'Tropical',
-        categorys: [
-          'Em alta',
-          'Novidades'
-        ]
-      },
-      {
-        id: '5',
-        bgColor: '#F1EFF6',
-        image: {
-          source: melon_salad,
-          width: '100px',
-          height: '60px',
-          mgTop: '5px'
+        {
+          id: '4',
+          bgColor: '#FEF0F0',
+          image: {
+            source: tropical_fruit_salad,
+            width: '100px',
+            height: '50px',
+            mgTop: '5px'
+          },
+          price: '10,000',
+          title: 'Tropical',
+          categorys: [
+            'Em alta',
+            'Novidades'
+          ],
+          isInBasket: false
         },
-        price: '10,000',
-        title: 'Melão',
-        categorys: [
-          'Em alta',
-          'Gourmet'
-        ]
-      }
-    ])
-  }, [])
+        {
+          id: '5',
+          bgColor: '#F1EFF6',
+          image: {
+            source: melon_salad,
+            width: '100px',
+            height: '60px',
+            mgTop: '5px'
+          },
+          price: '10,000',
+          title: 'Melão',
+          categorys: [
+            'Em alta',
+            'Gourmet'
+          ],
+          isInBasket: false
+        }
+      ]
+
+      fruisSaladsData = fruisSaladsData.map(item => {
+        basket.map(basketItem => {
+          if (item.id === basketItem.id) {
+            item.isInBasket = true
+          }
+
+          return basketItem
+        })
+        return item
+      })
+
+      setFruitsSalad(fruisSaladsData)
+    }
+
+    loadCombos()
+    loadFruitsSalads()
+  }, [basket])
 
   function searchFS (): IFruitSalad[] {
     const filterFruitsSalads: IFruitSalad[] = []
@@ -164,7 +186,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
           activeOpacity={0.8}
           onPress={() => navigation.navigate('Basket')}
           >
-          <S.Basket source={basket} />
+          <S.Basket source={basket_image} />
           <S.TextBasket>Minha cesta</S.TextBasket>
         </S.ButtonBasket>
       </S.Header>
@@ -197,12 +219,13 @@ export const Market: React.FC<Props> = ({ navigation }) => {
             >
               {serachFruitSalad.length > 0 && serachFruitSalad.map(item => (
                 <FruitSalad
-                key={item.id}
-                id={item.id}
-                bgColor={item.bgColor}
-                image={item.image}
-                price={item.price}
-                title={item.title}
+                  key={item.id}
+                  id={item.id}
+                  bgColor={item.bgColor}
+                  image={item.image}
+                  price={item.price}
+                  title={item.title}
+                  isInBasket={item.isInBasket}
                 />
               ))}
             </S.SearchGrid>
@@ -228,6 +251,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
                 image={fruitSaladItem.image}
                 price={fruitSaladItem.price}
                 title={fruitSaladItem.title}
+                isInBasket={fruitSaladItem.isInBasket}
               />
             ))}
           </S.RecomendedSlide>
@@ -278,6 +302,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
                 image={fruitSaladItem.image}
                 price={fruitSaladItem.price}
                 title={fruitSaladItem.title}
+                isInBasket={fruitSaladItem.isInBasket}
               />
             ))}
           </S.FilterSlide>

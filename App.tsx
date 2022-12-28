@@ -6,6 +6,7 @@ import { Text } from 'react-native'
 
 import theme from './src/theme'
 import { Routes } from './src/routes'
+import { BasketProvider } from './src/context/basket'
 
 function App (): JSX.Element {
   const [fontLoaded] = useFonts({
@@ -18,7 +19,11 @@ function App (): JSX.Element {
   return (
     <ThemeProvider theme={theme}>
         {fontLoaded
-          ? <Routes />
+          ? (
+            <BasketProvider>
+              <Routes />
+            </BasketProvider>
+            )
           : <Text>Loading</Text>}
       <StatusBar
         backgroundColor='transparent'
