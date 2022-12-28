@@ -93,3 +93,15 @@ export const GoBackText = styled.Text`
   font-size: ${({ theme }) => theme.FONT_SIZE.MD};
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `
+
+export const TextInfoContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`
+
+export const TextInfo = styled.Text`
+  color: ${({ theme }) => theme.COLORS.GRAY};
+  font-size: ${({ theme }) => theme.FONT_SIZE.MD};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+`

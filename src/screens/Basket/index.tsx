@@ -32,7 +32,9 @@ export const Basket: React.FC<Props> = ({ navigation }) => {
           />
           <S.GoBackText>Voltar</S.GoBackText>
         </S.GoBack>
-        <ScrollView>
+        {basket.length > 0
+          ? (
+          <ScrollView>
           {basket.length > 0 && basket.map(fruitSalad => (
             <BasketItem
               key={fruitSalad.id}
@@ -44,6 +46,12 @@ export const Basket: React.FC<Props> = ({ navigation }) => {
             />
           ))}
         </ScrollView>
+            )
+          : (
+          <S.TextInfoContainer>
+            <S.TextInfo>Não há nada por aqui!</S.TextInfo>
+          </S.TextInfoContainer>
+            )}
       </S.Content>
       <S.Footer>
         <S.TotalContainer>
@@ -55,6 +63,8 @@ export const Basket: React.FC<Props> = ({ navigation }) => {
         </S.TotalContainer>
         <S.CheckoutButton
           activeOpacity={0.8}
+          disabled={basket.length <= 0}
+          onPress={() => navigation.navigate('Congratulations')}
         >
           <S.CheckoutButtonText>Finalizar</S.CheckoutButtonText>
         </S.CheckoutButton>
