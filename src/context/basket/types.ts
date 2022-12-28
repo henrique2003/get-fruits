@@ -29,5 +29,3 @@ export type BasketContextData = {
   removeItem: (id: string) => void
   removeAllItem: () => void
 }
-
-export type ISingOutAction = () => void

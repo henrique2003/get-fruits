@@ -14,7 +14,8 @@ import theme from '../../theme'
 import { FruitSalad, TextFilter } from '../../components'
 import { RouteNames } from '../../routes/types'
 import { IFruitSalad } from '../../context/basket/types'
-import { BasketContext } from '../../context/basket/index'
+import { BasketContext } from '../../context/basket'
+import { UserContext } from '../../context/user'
 
 interface Props {
   navigation: {
@@ -29,6 +30,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
   const [currentFilter, setCurrentFilter] = useState('Em alta')
 
   const { basket } = useContext(BasketContext)
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     function loadCombos (): void {
@@ -191,7 +193,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
         </S.ButtonBasket>
       </S.Header>
       <S.Title>
-        <S.Span>Olá Henrique</S.Span>, qual combo de salada de frutas você quer hoje?
+        <S.Span>Olá {user.name}</S.Span>, qual combo de salada de frutas você quer hoje?
       </S.Title>
       <S.ContainerInput>
         <S.TextInput

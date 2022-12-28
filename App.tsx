@@ -7,6 +7,7 @@ import { Text } from 'react-native'
 import theme from './src/theme'
 import { Routes } from './src/routes'
 import { BasketProvider } from './src/context/basket'
+import { UserProvider } from './src/context/user'
 
 function App (): JSX.Element {
   const [fontLoaded] = useFonts({
@@ -20,9 +21,11 @@ function App (): JSX.Element {
     <ThemeProvider theme={theme}>
         {fontLoaded
           ? (
-            <BasketProvider>
-              <Routes />
-            </BasketProvider>
+            <UserProvider>
+              <BasketProvider>
+                <Routes />
+              </BasketProvider>
+            </UserProvider>
             )
           : <Text>Loading</Text>}
       <StatusBar
