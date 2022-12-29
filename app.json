@@ -18,13 +18,17 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1.0.0",
+      "bundleIdentifier": "com.henrqiue-cristioglu.get-fruits"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFA451"
-      }
+      },
+      "package": "com.henrqiue-cristioglu.get-fruits",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
