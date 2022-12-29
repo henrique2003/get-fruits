@@ -148,7 +148,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
     fruitsSalad.map(item => {
       const title = item.title.toLocaleLowerCase()
 
-      if (title.includes(textSearch)) {
+      if (title.includes(textSearch.replace('ã', 'a'))) {
         filterFruitsSalads.push(item)
       }
       return item
@@ -157,7 +157,7 @@ export const Market: React.FC<Props> = ({ navigation }) => {
     combos.map(item => {
       const title = item.title.toLocaleLowerCase()
 
-      if (title.includes(textSearch)) {
+      if (title.includes(textSearch.replace('ã', 'a'))) {
         filterFruitsSalads.push(item)
       }
       return item

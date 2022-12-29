@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { ScrollView } from 'react-native'
 
 import { RouteNames } from '../../routes/types'
@@ -14,7 +14,22 @@ interface Props {
 }
 
 export const Basket: React.FC<Props> = ({ navigation }) => {
+  const [totalPrice, setTotalPrice] = useState(0)
+
   const { basket } = useContext(BasketContext)
+
+  useEffect(() => {
+    let total = 0
+
+    basket.map(item => {
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands, no-eval
+      total += eval(item.price.replace(',', '.'))
+
+      return item
+    })
+
+    setTotalPrice(total)
+  }, [totalPrice])
 
   return (
     <S.Container>
@@ -58,7 +73,7 @@ export const Basket: React.FC<Props> = ({ navigation }) => {
             <S.TotalText>Total</S.TotalText>
           <S.TotalPrice>
             <S.TotalPriceIcon size={20} />
-            <S.TotalPriceText>60,000</S.TotalPriceText>
+            <S.TotalPriceText>{totalPrice},000</S.TotalPriceText>
           </S.TotalPrice>
         </S.TotalContainer>
         <S.CheckoutButton
