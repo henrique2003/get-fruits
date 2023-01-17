@@ -29,7 +29,7 @@ Esta é uma aplicação que consiste em telas de boas vindas, outra com o mercad
 # clonar repositório
 git clone https://github.com/henrique2003/get-fruits
 
-# entrar na pasta do projeto front end web
+# entrar na pasta do projeto
 cd get-fruits
 
 # instalar dependências
