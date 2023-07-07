@@ -43,4 +43,4 @@ npm start
 
 Henrique de Melo Cristioglu
 
-https://www.linkedin.com/in/henrique-cristioglu-a2b2b2194/
+https://www.linkedin.com/in/henrique-cristioglu
